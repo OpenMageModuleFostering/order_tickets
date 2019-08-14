@@ -1,0 +1,57 @@
+<?php
+
+/*
+ * @category   Laurent
+ * @package    Laurent_OrderTickets
+ * @copyright  Copyright (c) 2011 Laurent Clouet
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * @author     Laurent Clouet <laurent35240@gmail.com>
+ */
+
+/**
+ * @var $this Laurent_OrderTickets_Block_Chat
+ */
+
+$_order = $this->getOrder();
+?>
+<?php foreach($this->getTickets() as $ticket):?>
+    <?php /** @var $ticket Laurent_OrderTickets_Model_Ticket */?>
+<div class="ticket <?php echo $ticket->getType()?>">
+    <h4>
+        <?php if($ticket->isRequest()) :?>
+        <?php echo $this->__('Your message send the') ?> 
+        <?php else: ?>
+        <?php echo $this->__('Answer from %s send the', Mage::app()->getStore()->getName()) ?> 
+        <?php endif; ?>
+        <?php echo $ticket->getCreatedAtFormated() ?>
+    </h4>
+    <p>
+        <?php echo nl2br($ticket->getMessage()) ?>
+    </p>
+</div>
+<?php endforeach; ?>
+
+<?php if($this->getChat()->canReply()): ?>
+<form action="<?php echo $this->getSendTicketPostUrl() ?>" method="post" id="form-send-ticket">
+    <div class="fieldset">
+        <h4 class="legend"><?php echo $this->__('Add a message') ?></h4>
+        <ul class="form-list">
+            <li class="wide">
+                <label for="message" class="required"><em>*</em><?php echo $this->__('Message') ?></label>
+                <div class="input-box">
+                    <textarea name="message" id="message" title="<?php echo $this->__('Message') ?>" class="required-entry input-text" cols="60" rows="5"><?php //echo $this->getEscaped($this->getMessage()) ?></textarea>
+                </div>
+            </li>
+        </ul>
+        <input type="hidden" name="order-id" value="<?php echo $this->getOrder()->getId(); ?>" />
+    </div>
+    <div class="buttons-set">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <a href="<?php echo $this->getBackUrl() ?>" class="left">&laquo; <?php echo $this->__('Back to My Orders') ?></a>
+        <button class="button" type="submit"><span><?php echo $this->__('Send') ?></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    var dataForm = new VarienForm('form-send-ticket', true);
+</script>
+<?php endif; ?>

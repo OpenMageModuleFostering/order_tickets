@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ordertickets.xml
+    Created on : 30 avril 2011, 13:01
+    Author     : laurent
+-->
+<layout version="0.1.0">
+    <ordertickets_chat_view>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="sales/order_info" as="info" name="sales.order.info">
+                <block type="sales/order_info_buttons" as="buttons" name="sales.order.info.buttons" />
+                <action method="addLink" translate="label" module="sales">
+                    <name>view</name>
+                    <path>sales/order/view</path>
+                    <label>Order Information</label>
+                </action>
+                <action method="addLink" translate="label" module="sales">
+                    <name>invoice</name>
+                    <path>sales/order/invoice</path>
+                    <label>Invoices</label>
+                </action>
+                <action method="addLink" translate="label" module="sales">
+                    <name>shipment</name>
+                    <path>sales/order/shipment</path>
+                    <label>Shipments</label>
+                </action>
+                <action method="addLink" translate="label" module="sales">
+                    <name>creditmemo</name>
+                    <path>sales/order/creditmemo</path>
+                    <label>Refunds</label>
+                </action>
+                <action method="addLink" translate="label" module="ordertickets">
+                    <name>ordertickets</name>
+                    <path/>
+                    <label>Messages</label>
+                </action>
+            </block>
+            <block type="ordertickets/chat" name="ordertickets_chat" template="ordertickets/chat.phtml"/>
+        </reference>
+    </ordertickets_chat_view>
+
+    <ordertickets_chat_link>
+        <reference name="sales.order.info">
+            <action method="addLink" translate="label" module="ordertickets">
+                <name>ordertickets</name>
+                <path>ordertickets/chat/view</path>
+                <label>Messages</label>
+            </action>
+        </reference>
+    </ordertickets_chat_link>
+
+    <sales_order_view>
+        <update handle="ordertickets_chat_link"/>
+    </sales_order_view>
+
+    <sales_order_invoice>
+        <update handle="ordertickets_chat_link"/>
+    </sales_order_invoice>
+
+    <sales_order_shipment>
+        <update handle="ordertickets_chat_link"/>
+    </sales_order_shipment>
+
+    <sales_order_creditmemo>
+        <update handle="ordertickets_chat_link"/>
+    </sales_order_creditmemo>
+</layout>
