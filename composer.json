@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Order_tickets",
+    "name": "OpenMageModuleFostering\/Order_tickets",
     "type": "magento-module",
     "license": "Academic-Free-License-(AFL-3.0)",
     "homepage": "",
     "description": "Ticketing system to order",
     "authors": [
-    {
-        "name": "Laurent Clouet",
-        "email": "laurent35240@gmail.com"
-    }
-],
+        {
+            "name": "Laurent Clouet",
+            "email": "laurent35240@gmail.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
